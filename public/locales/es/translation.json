@@ -1,0 +1,38 @@
+{
+  "app": {
+    "name": "Ai Hydrosense",
+    "tagline": "Ai Hydrosense: evaluación del agua"
+  },
+  "navbar": {
+    "home": "Inicio",
+    "howItWorks": "Cómo Funciona",
+    "detection": "Detección",
+    "results": "Historial de Resultados",
+    "about": "Acerca de"
+  },
+  "home": {
+    "heroTitle": "Kit de Detección de Metales Pesados con Guía de Seguridad IA",
+    "heroSubtitle": "Pruebas de agua basadas en color con recomendaciones de seguridad impulsadas por IA, precauciones y orientación de tratamiento.",
+    "startDetection": "Iniciar Detección",
+    "featuresTitle": "¿Por qué elegir nuestro kit de detección?",
+    "featuresSubtitle": "Detección tradicional por color combinada con orientación de seguridad con IA para pruebas de agua completas",
+    "features": {
+      "aiSafety": {
+        "title": "Recomendaciones de Seguridad con IA",
+        "description": "Google Gemini IA proporciona consejos de seguridad, opciones de tratamiento y orientación de salud"
+      },
+      "reliableColor": {
+        "title": "Detección de Color Confiable",
+        "description": "Detección basada en color con precisión probada para identificar metales pesados"
+      },
+      "comprehensive": {
+        "title": "Guía Integral",
+        "description": "Precauciones detalladas, opciones de tratamiento y recomendaciones de ayuda profesional"
+      }
+    }
+  }
+}
+
+
+
+

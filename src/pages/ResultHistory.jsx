@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { History, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const BACKEND_URL = 'https://pharmacy-project-lh5x.onrender.com';
 const API = `${BACKEND_URL}/api`;
@@ -10,6 +11,7 @@ const API = `${BACKEND_URL}/api`;
 export default function ResultHistory() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchResults();
@@ -21,7 +23,7 @@ export default function ResultHistory() {
       setResults(response.data);
     } catch (error) {
       console.error("Error fetching results:", error);
-      toast.error("Failed to load results history");
+      toast.error(t("results.emptyTitle"));
     } finally {
       setLoading(false);
     }
@@ -61,13 +63,9 @@ export default function ResultHistory() {
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <History className="h-12 w-12 text-[#2563EB]" />
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E3A8A]">
-              Results History
-            </h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E3A8A]">{t("results.title")}</h1>
           </div>
-          <p className="text-base sm:text-lg text-gray-600">
-            View all your previous water analysis results
-          </p>
+          <p className="text-base sm:text-lg text-gray-600">{t("results.subtitle")}</p>
         </motion.div>
 
         {/* Loading State */}
@@ -85,8 +83,8 @@ export default function ResultHistory() {
             className="bg-white rounded-3xl p-12 shadow-xl text-center"
           >
             <History className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-lg text-gray-600">No analysis results yet</p>
-            <p className="text-sm text-gray-500 mt-2">Start by analyzing a water sample</p>
+            <p className="text-lg text-gray-600">{t("results.emptyTitle")}</p>
+            <p className="text-sm text-gray-500 mt-2">{t("results.emptySubtitle")}</p>
           </motion.div>
         )}
 
@@ -105,11 +103,11 @@ export default function ResultHistory() {
                 <div className="grid md:grid-cols-4 gap-6">
                   {/* Metal & Concentration */}
                   <div className="md:col-span-1">
-                    <div className="text-sm text-gray-500 mb-1">Metal</div>
+                    <div className="text-sm text-gray-500 mb-1">{t("results.labels.metal")}</div>
                     <div className="text-xl font-bold text-[#1E3A8A]">
                       {result.metal}
                     </div>
-                    <div className="text-sm text-gray-500 mt-2">Concentration</div>
+                    <div className="text-sm text-gray-500 mt-2">{t("results.labels.concentration")}</div>
                     <div className="text-lg font-semibold text-[#2563EB]">
                       {result.concentration}
                     </div>
@@ -117,7 +115,7 @@ export default function ResultHistory() {
 
                   {/* Status */}
                   <div className="md:col-span-1">
-                    <div className="text-sm text-gray-500 mb-2">Status</div>
+                    <div className="text-sm text-gray-500 mb-2">{t("results.labels.status")}</div>
                     <div
                       className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(result.status)}`}
                     >
@@ -128,7 +126,7 @@ export default function ResultHistory() {
 
                   {/* Color */}
                   <div className="md:col-span-1">
-                    <div className="text-sm text-gray-500 mb-2">Detected Color</div>
+                    <div className="text-sm text-gray-500 mb-2">{t("results.labels.detectedColor")}</div>
                     <div className="flex items-center gap-3">
                       <div
                         className="w-12 h-12 rounded-lg shadow-md"
@@ -144,7 +142,7 @@ export default function ResultHistory() {
 
                   {/* Date */}
                   <div className="md:col-span-1">
-                    <div className="text-sm text-gray-500 mb-1">Analyzed On</div>
+                    <div className="text-sm text-gray-500 mb-1">{t("results.labels.analyzedOn")}</div>
                     <div className="text-sm text-gray-700">
                       {formatDate(result.timestamp)}
                     </div>
@@ -153,7 +151,7 @@ export default function ResultHistory() {
 
                 {/* Recommendation */}
                 <div className="mt-6 pt-6 border-t border-gray-100">
-                  <div className="text-sm text-gray-500 mb-2">Recommendation</div>
+                  <div className="text-sm text-gray-500 mb-2">{t("results.labels.recommendation")}</div>
                   <p className="text-sm text-gray-700">{result.recommendation}</p>
                 </div>
               </motion.div>

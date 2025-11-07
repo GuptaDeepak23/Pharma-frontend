@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import ColorPicker from "@/components/ColorPicker";
 import axios from "axios";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const BACKEND_URL ='https://pharmacy-project-lh5x.onrender.com';
 const API = `${BACKEND_URL}/api`;
@@ -16,6 +17,7 @@ export default function Detection() {
   const [result, setResult] = useState(null);
   const [manualColor, setManualColor] = useState(null);
   const [useManualColor, setUseManualColor] = useState(false);
+  const { t } = useTranslation();
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
@@ -36,7 +38,7 @@ export default function Detection() {
 
   const handleAnalysis = async () => {
     if (!selectedFile) {
-      toast.error("Please select an image first");
+      toast.error(t("detection.clickToUpload"));
       return;
     }
 
@@ -62,10 +64,10 @@ export default function Detection() {
       });
 
       setResult(response.data);
-      toast.success("Analysis complete!");
+      toast.success(t("detection.analysisResults"));
     } catch (error) {
       console.error("Analysis error:", error);
-      toast.error(error.response?.data?.detail || "Error analyzing image. Please try again.");
+      toast.error(error.response?.data?.detail || t("detection.loadingText"));
     } finally {
       setLoading(false);
     }
@@ -116,10 +118,10 @@ export default function Detection() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E3A8A] mb-4">
-            Heavy Metal Detection with AI Recommendations
+            {t("detection.title")}
           </h1>
           <p className="text-base sm:text-lg text-gray-600">
-            Upload a test tube image for color-based detection and AI-powered safety recommendations
+            {t("detection.subtitle")}
           </p>
         </motion.div>
 
@@ -139,10 +141,10 @@ export default function Detection() {
               >
                 <Upload className="h-16 w-16 text-[#2563EB] mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-[#1E3A8A] mb-2">
-                  Click to Upload Image
+                  {t("detection.clickToUpload")}
                 </h3>
                 <p className="text-sm text-gray-500">
-                  Support: JPG, PNG, JPEG
+                  {t("detection.supportFormats")}
                 </p>
               </div>
 
@@ -156,7 +158,7 @@ export default function Detection() {
               />
 
               <div className="text-center">
-                <p className="text-sm text-gray-500 mb-4">Or capture directly</p>
+                <p className="text-sm text-gray-500 mb-4">{t("detection.orCapture")}</p>
                 <Button
                   data-testid="camera-btn"
                   variant="outline"
@@ -164,7 +166,7 @@ export default function Detection() {
                   onClick={() => document.getElementById('file-input').click()}
                 >
                   <Camera className="mr-2 h-4 w-4" />
-                  Use Camera
+                  {t("detection.useCamera")}
                 </Button>
               </div>
             </div>
@@ -186,12 +188,12 @@ export default function Detection() {
                   {useManualColor ? (
                     <>
                       <Palette className="h-4 w-4" />
-                      Using Manual Color Selection
+                      {t("detection.usingManual")}
                     </>
                   ) : (
                     <>
                       <Camera className="h-4 w-4" />
-                      Using Automatic Detection
+                      {t("detection.usingAuto")}
                     </>
                   )}
                 </div>
@@ -211,7 +213,7 @@ export default function Detection() {
                   }}
                   className="border-gray-300"
                 >
-                  Change Image
+                  {t("detection.changeImage")}
                 </Button>
                 <Button
                   data-testid="start-analysis-btn"
@@ -225,10 +227,10 @@ export default function Detection() {
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Analyzing...
+                      {t("detection.analyzing")}
                     </>
                   ) : (
-                    "Start Analysis"
+                    t("detection.startAnalysis")
                   )}
                 </Button>
               </div>
@@ -244,7 +246,7 @@ export default function Detection() {
             className="bg-white rounded-3xl p-12 shadow-xl text-center"
           >
             <Loader2 className="h-16 w-16 text-[#2563EB] mx-auto mb-4 animate-spin" />
-            <p className="text-lg text-gray-600">Analyzing sample and generating AI recommendations, please wait…</p>
+            <p className="text-lg text-gray-600">{t("detection.loadingText")}</p>
           </motion.div>
         )}
 
@@ -258,21 +260,17 @@ export default function Detection() {
             className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl"
           >
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-[#1E3A8A] mb-2">
-                Analysis Results
-              </h2>
+              <h2 className="text-3xl font-bold text-[#1E3A8A] mb-2">{t("detection.analysisResults")}</h2>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 text-sm text-[#1E3A8A]">
                 <Brain className="h-4 w-4" />
-                AI-Powered Safety Recommendations
+                {t("detection.aiBadge")}
               </div>
             </div>
 
             <div className="space-y-6">
               {/* Metal Name */}
               <div>
-                <label className="text-sm font-medium text-gray-500 block mb-2">
-                  Detected Metal
-                </label>
+                <label className="text-sm font-medium text-gray-500 block mb-2">{t("detection.labels.detectedMetal")}</label>
                 <div
                   data-testid="metal-name"
                   className="text-2xl font-bold text-[#1E3A8A]"
@@ -283,9 +281,7 @@ export default function Detection() {
 
               {/* Concentration */}
               <div>
-                <label className="text-sm font-medium text-gray-500 block mb-2">
-                  Concentration
-                </label>
+                <label className="text-sm font-medium text-gray-500 block mb-2">{t("detection.labels.concentration")}</label>
                 <div
                   data-testid="concentration"
                   className="text-2xl font-bold text-[#2563EB]"
@@ -296,9 +292,7 @@ export default function Detection() {
 
               {/* Status */}
               <div>
-                <label className="text-sm font-medium text-gray-500 block mb-2">
-                  Status
-                </label>
+                <label className="text-sm font-medium text-gray-500 block mb-2">{t("detection.labels.status")}</label>
                 <div
                   data-testid="status"
                   className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-semibold ${getStatusColor(result.status)}`}
@@ -311,9 +305,7 @@ export default function Detection() {
 
               {/* Detected Color */}
               <div>
-                <label className="text-sm font-medium text-gray-500 block mb-2">
-                  Detected Color (RGB)
-                </label>
+                <label className="text-sm font-medium text-gray-500 block mb-2">{t("detection.labels.detectedColorRgb")}</label>
                 <div className="flex items-center gap-4">
                   <div
                     className="w-16 h-16 rounded-xl shadow-md"
@@ -329,9 +321,7 @@ export default function Detection() {
 
               {/* Basic Recommendation */}
               <div className="bg-blue-50 rounded-2xl p-6">
-                <label className="text-sm font-medium text-[#1E3A8A] block mb-2">
-                  Basic Recommendation
-                </label>
+                <label className="text-sm font-medium text-[#1E3A8A] block mb-2">{t("detection.labels.basicRecommendation")}</label>
                 <p
                   data-testid="recommendation"
                   className="text-base text-gray-700"
@@ -355,9 +345,7 @@ export default function Detection() {
                     <div className="bg-red-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <AlertCircle className="h-5 w-5 text-red-600" />
-                        <label className="text-sm font-medium text-red-800">
-                          Immediate Actions
-                        </label>
+                        <label className="text-sm font-medium text-red-800">{t("detection.labels.immediateActions")}</label>
                       </div>
                       <ul className="space-y-2">
                         {result.ai_recommendations.immediate_actions.map((action, index) => (
@@ -375,9 +363,7 @@ export default function Detection() {
                     <div className="bg-green-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <Shield className="h-5 w-5 text-green-600" />
-                        <label className="text-sm font-medium text-green-800">
-                          Treatment Options
-                        </label>
+                        <label className="text-sm font-medium text-green-800">{t("detection.labels.treatmentOptions")}</label>
                       </div>
                       <ul className="space-y-2">
                         {result.ai_recommendations.treatment_options.map((option, index) => (
@@ -395,9 +381,7 @@ export default function Detection() {
                     <div className="bg-orange-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <AlertCircle className="h-5 w-5 text-orange-600" />
-                        <label className="text-sm font-medium text-orange-800">
-                          Health Considerations
-                        </label>
+                        <label className="text-sm font-medium text-orange-800">{t("detection.labels.healthConsiderations")}</label>
                       </div>
                       <p className="text-sm text-gray-700">
                         {result.ai_recommendations.health_risks}
@@ -410,9 +394,7 @@ export default function Detection() {
                     <div className="bg-blue-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <Lightbulb className="h-5 w-5 text-blue-600" />
-                        <label className="text-sm font-medium text-blue-800">
-                          Prevention Tips
-                        </label>
+                        <label className="text-sm font-medium text-blue-800">{t("detection.labels.preventionTips")}</label>
                       </div>
                       <ul className="space-y-2">
                         {result.ai_recommendations.prevention_tips.map((tip, index) => (
@@ -430,9 +412,7 @@ export default function Detection() {
                     <div className="bg-purple-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <TrendingUp className="h-5 w-5 text-purple-600" />
-                        <label className="text-sm font-medium text-purple-800">
-                          Professional Help
-                        </label>
+                        <label className="text-sm font-medium text-purple-800">{t("detection.labels.professionalHelp")}</label>
                       </div>
                       <p className="text-sm text-gray-700">
                         {result.ai_recommendations.professional_help}
@@ -445,9 +425,7 @@ export default function Detection() {
                     <div className="bg-yellow-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <Shield className="h-5 w-5 text-yellow-600" />
-                        <label className="text-sm font-medium text-yellow-800">
-                          Additional Precautions
-                        </label>
+                        <label className="text-sm font-medium text-yellow-800">{t("detection.labels.additionalPrecautions")}</label>
                       </div>
                       <p className="text-sm text-gray-700">
                         {result.ai_recommendations.additional_precautions}

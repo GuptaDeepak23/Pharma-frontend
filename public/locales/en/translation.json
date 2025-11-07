@@ -1,0 +1,135 @@
+{
+  "app": {
+    "name": "Ai Hydrosense",
+    "tagline": "Ai Hydrosense : assessment of water"
+  },
+  "navbar": {
+    "home": "Home",
+    "howItWorks": "How It Works",
+    "detection": "Detection",
+    "results": "Results History",
+    "about": "About"
+  },
+  "home": {
+    "heroTitle": "Heavy Metal Detection Kit with AI Safety Guide",
+    "heroSubtitle": "Color-based water testing with AI-powered safety recommendations, precautions, and treatment guidance.",
+    "startDetection": "Start Detection",
+    "featuresTitle": "Why Choose Our Detection Kit?",
+    "featuresSubtitle": "Traditional color detection combined with AI-powered safety guidance for comprehensive water testing",
+    "features": {
+      "aiSafety": {
+        "title": "AI Safety Recommendations",
+        "description": "Google Gemini AI provides comprehensive safety advice, treatment options, and health guidance"
+      },
+      "reliableColor": {
+        "title": "Reliable Color Detection",
+        "description": "Traditional color-based detection with proven accuracy for heavy metal identification"
+      },
+      "comprehensive": {
+        "title": "Comprehensive Guidance",
+        "description": "Detailed precautions, treatment options, and professional help recommendations"
+      }
+    }
+  }
+  ,
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Follow these simple steps to test your water sample for heavy metal contamination",
+    "steps": {
+      "addWaterSample": {
+        "title": "Add Water Sample",
+        "description": "Collect your water sample in a clean test tube"
+      },
+      "addReagent": {
+        "title": "Add Reagent",
+        "description": "Add the provided reagent and wait for color change (2-3 minutes)"
+      },
+      "uploadPhoto": {
+        "title": "Upload Photo",
+        "description": "Take a clear photo of the test tube and upload it to our platform"
+      },
+      "getResults": {
+        "title": "Get Results",
+        "description": "AI analyzes the color and provides instant contamination results"
+      }
+    },
+    "colorGuideTitle": "Color Reference Guide",
+    "colorGuideSubtitle": "Our AI system compares your sample against these reference colors to detect heavy metals",
+    "colors": {
+      "lead1000": "Lead 1000ppm",
+      "lead10": "Lead 10ppm",
+      "lead0_1": "Lead 0.1ppm",
+      "lead0_01": "Lead 0.01ppm",
+      "mercury1000": "Mercury 1000ppm",
+      "mercury10": "Mercury 10ppm",
+      "mercury0_1": "Mercury 0.1ppm",
+      "mercury0_01": "Mercury 0.01ppm",
+      "mixedHigh": "Mixed High",
+      "mixedMedium": "Mixed Medium",
+      "mixedLow": "Mixed Low",
+      "mixedVeryLow": "Mixed Very Low"
+    }
+  },
+  "detection": {
+    "title": "Heavy Metal Detection with AI Recommendations",
+    "subtitle": "Upload a test tube image for color-based detection and AI-powered safety recommendations",
+    "clickToUpload": "Click to Upload Image",
+    "supportFormats": "Support: JPG, PNG, JPEG",
+    "orCapture": "Or capture directly",
+    "useCamera": "Use Camera",
+    "usingManual": "Using Manual Color Selection",
+    "usingAuto": "Using Automatic Detection",
+    "changeImage": "Change Image",
+    "startAnalysis": "Start Analysis",
+    "analyzing": "Analyzing...",
+    "loadingText": "Analyzing sample and generating AI recommendations, please wait…",
+    "analysisResults": "Analysis Results",
+    "aiBadge": "AI-Powered Safety Recommendations",
+    "labels": {
+      "detectedMetal": "Detected Metal",
+      "concentration": "Concentration",
+      "status": "Status",
+      "detectedColorRgb": "Detected Color (RGB)",
+      "basicRecommendation": "Basic Recommendation",
+      "immediateActions": "Immediate Actions",
+      "treatmentOptions": "Treatment Options",
+      "healthConsiderations": "Health Considerations",
+      "preventionTips": "Prevention Tips",
+      "professionalHelp": "Professional Help",
+      "additionalPrecautions": "Additional Precautions"
+    }
+  },
+  "results": {
+    "title": "Results History",
+    "subtitle": "View all your previous water analysis results",
+    "emptyTitle": "No analysis results yet",
+    "emptySubtitle": "Start by analyzing a water sample",
+    "labels": {
+      "metal": "Metal",
+      "concentration": "Concentration",
+      "status": "Status",
+      "detectedColor": "Detected Color",
+      "analyzedOn": "Analyzed On",
+      "recommendation": "Recommendation"
+    }
+  },
+  "about": {
+    "title": "About Our Project",
+    "subtitle": "Making water quality testing accessible to everyone through innovative AI technology",
+    "missionTitle": "Our Mission",
+    "missionBody": "The AI-Integrated Heavy Metal Detection Kit is designed to democratize water quality testing. By combining traditional chemical reagent testing with cutting-edge artificial intelligence, we provide accurate, fast, and accessible heavy metal detection for students, researchers, pharmacists, and communities worldwide.",
+    "innovationTitle": "Innovation",
+    "innovationBody": "Our AI-powered color analysis technology eliminates the need for expensive laboratory equipment, making water testing affordable and accessible to everyone.",
+    "communityTitle": "Community Impact",
+    "communityBody": "We empower communities to take control of their water quality, providing tools for early detection of contamination and protecting public health.",
+    "technologyTitle": "The Technology",
+    "techBody1": "Our system uses advanced computer vision and machine learning algorithms to analyze the color of chemical reagent reactions. By comparing the captured image against a comprehensive database of reference colors, we can accurately identify the presence and concentration of heavy metals like lead and mercury.",
+    "techBody2": "The detection process is simple: add reagent to your water sample, wait for the color change, take a photo, and let our AI do the rest. Results are available in seconds, with detailed recommendations based on contamination levels.",
+    "contactTitle": "Get In Touch",
+    "contactBody": "Have questions about our technology or want to collaborate? We'd love to hear from you.",
+    "emailUs": "Email Us"
+  }
+}
+
+
+
