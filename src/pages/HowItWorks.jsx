@@ -1,31 +1,33 @@
 import { motion } from "framer-motion";
 import { Beaker, Droplets, Upload, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function HowItWorks() {
+  const { t } = useTranslation();
   const steps = [
     {
       number: "01",
       icon: <Beaker className="h-12 w-12" />,
-      title: "Add Water Sample",
-      description: "Collect your water sample in a clean test tube"
+      title: t("howItWorks.steps.addWaterSample.title"),
+      description: t("howItWorks.steps.addWaterSample.description")
     },
     {
       number: "02",
       icon: <Droplets className="h-12 w-12" />,
-      title: "Add Reagent",
-      description: "Add the provided reagent and wait for color change (2-3 minutes)"
+      title: t("howItWorks.steps.addReagent.title"),
+      description: t("howItWorks.steps.addReagent.description")
     },
     {
       number: "03",
       icon: <Upload className="h-12 w-12" />,
-      title: "Upload Photo",
-      description: "Take a clear photo of the test tube and upload it to our platform"
+      title: t("howItWorks.steps.uploadPhoto.title"),
+      description: t("howItWorks.steps.uploadPhoto.description")
     },
     {
       number: "04",
       icon: <Sparkles className="h-12 w-12" />,
-      title: "Get Results",
-      description: "AI analyzes the color and provides instant contamination results"
+      title: t("howItWorks.steps.getResults.title"),
+      description: t("howItWorks.steps.getResults.description")
     }
   ];
 
@@ -40,10 +42,10 @@ export default function HowItWorks() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E3A8A] mb-6">
-            How It Works
+            {t("howItWorks.title")}
           </h1>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-            Follow these simple steps to test your water sample for heavy metal contamination
+            {t("howItWorks.subtitle")}
           </p>
         </motion.div>
 
@@ -103,25 +105,25 @@ export default function HowItWorks() {
           className="mt-16 bg-white rounded-3xl p-8 shadow-xl"
         >
           <h3 className="text-2xl font-bold text-[#1E3A8A] mb-6 text-center">
-            Color Reference Guide
+            {t("howItWorks.colorGuideTitle")}
           </h3>
           <p className="text-base text-gray-600 text-center mb-8">
-            Our AI system compares your sample against these reference colors to detect heavy metals
+            {t("howItWorks.colorGuideSubtitle")}
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {[
-              { name: "Lead 1000ppm", color: "rgb(120, 50, 40)" },
-              { name: "Lead 10ppm", color: "rgb(140, 70, 55)" },
-              { name: "Lead 0.1ppm", color: "rgb(170, 100, 60)" },
-              { name: "Lead 0.01ppm", color: "rgb(200, 160, 110)" },
-              { name: "Mercury 1000ppm", color: "rgb(90, 60, 70)" },
-              { name: "Mercury 10ppm", color: "rgb(170, 80, 60)" },
-              { name: "Mercury 0.1ppm", color: "rgb(190, 120, 90)" },
-              { name: "Mercury 0.01ppm", color: "rgb(210, 170, 120)" },
-              { name: "Mixed High", color: "rgb(170, 90, 90)" },
-              { name: "Mixed Medium", color: "rgb(200, 120, 120)" },
-              { name: "Mixed Low", color: "rgb(210, 150, 150)" },
-              { name: "Mixed Very Low", color: "rgb(230, 170, 160)" }
+              { name: t("howItWorks.colors.lead1000"), color: "rgb(120, 50, 40)" },
+              { name: t("howItWorks.colors.lead10"), color: "rgb(140, 70, 55)" },
+              { name: t("howItWorks.colors.lead0_1"), color: "rgb(170, 100, 60)" },
+              { name: t("howItWorks.colors.lead0_01"), color: "rgb(200, 160, 110)" },
+              { name: t("howItWorks.colors.mercury1000"), color: "rgb(90, 60, 70)" },
+              { name: t("howItWorks.colors.mercury10"), color: "rgb(170, 80, 60)" },
+              { name: t("howItWorks.colors.mercury0_1"), color: "rgb(190, 120, 90)" },
+              { name: t("howItWorks.colors.mercury0_01"), color: "rgb(210, 170, 120)" },
+              { name: t("howItWorks.colors.mixedHigh"), color: "rgb(170, 90, 90)" },
+              { name: t("howItWorks.colors.mixedMedium"), color: "rgb(200, 120, 120)" },
+              { name: t("howItWorks.colors.mixedLow"), color: "rgb(210, 150, 150)" },
+              { name: t("howItWorks.colors.mixedVeryLow"), color: "rgb(230, 170, 160)" }
             ].map((item, index) => (
               <div key={index} className="text-center">
                 <div

@@ -68,3 +68,19 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Internationalization (i18n)
+
+This app uses i18next with react-i18next and language detection.
+
+- Locale files live in `public/locales/{lng}/translation.json`.
+- Supported languages: `en`, `es`.
+- Language can be switched from the Navbar selector.
+
+To add a new language (e.g., `hi`):
+
+1. Create `public/locales/hi/translation.json` by copying `en/translation.json`.
+2. Translate the values.
+3. Add an option to the language dropdown in `src/components/Navbar.jsx`.
+4. Optionally add `"hi"` to `supportedLngs` in `src/i18n.js`.
+

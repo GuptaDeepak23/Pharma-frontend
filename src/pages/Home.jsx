@@ -2,15 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Beaker, Droplet, Brain, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen">
 
 <span className="text-xl pt-2 text-center font-bold text-[#1E3A8A] block sm:hidden">
-            Ai Hydrosense : assessment of water
+            {t("app.tagline")}
             </span>
       {/* Hero Section */}
      
@@ -25,17 +27,17 @@ export default function Home() {
               className="space-y-6"
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E3A8A] leading-tight">
-                Heavy Metal Detection Kit with AI Safety Guide
+                {t("home.heroTitle")}
               </h1>
               <p className="text-base sm:text-lg text-gray-600">
-                Color-based water testing with AI-powered safety recommendations, precautions, and treatment guidance.
+                {t("home.heroSubtitle")}
               </p>
               <Button
                 data-testid="start-detection-btn"
                 onClick={() => navigate("/detection")}
                 className="bg-gradient-to-r from-[#1E3A8A] to-[#2563EB] hover:from-[#1e40af] hover:to-[#1d4ed8] text-white px-8 py-6 rounded-full text-lg font-medium shadow-lg"
               >
-                Start Detection <ArrowRight className="ml-2 h-5 w-5" />
+                {t("home.startDetection")} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </motion.div>
 
@@ -92,10 +94,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-[#1E3A8A] mb-4">
-              Why Choose Our Detection Kit?
+              {t("home.featuresTitle")}
             </h2>
             <p className="text-base text-gray-600 max-w-2xl mx-auto">
-              Traditional color detection combined with AI-powered safety guidance for comprehensive water testing
+              {t("home.featuresSubtitle")}
             </p>
           </motion.div>
 
@@ -103,18 +105,18 @@ export default function Home() {
             {[
               {
                 icon: <Brain className="h-10 w-10" />,
-                title: "AI Safety Recommendations",
-                description: "Google Gemini AI provides comprehensive safety advice, treatment options, and health guidance"
+                title: t("home.features.aiSafety.title"),
+                description: t("home.features.aiSafety.description")
               },
               {
                 icon: <Beaker className="h-10 w-10" />,
-                title: "Reliable Color Detection",
-                description: "Traditional color-based detection with proven accuracy for heavy metal identification"
+                title: t("home.features.reliableColor.title"),
+                description: t("home.features.reliableColor.description")
               },
               {
                 icon: <Droplet className="h-10 w-10" />,
-                title: "Comprehensive Guidance",
-                description: "Detailed precautions, treatment options, and professional help recommendations"
+                title: t("home.features.comprehensive.title"),
+                description: t("home.features.comprehensive.description")
               }
             ].map((feature, index) => (
               <motion.div

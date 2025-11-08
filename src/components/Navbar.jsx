@@ -3,17 +3,19 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X, Beaker } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { t, i18n } = useTranslation();
 
   const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/how-it-works", label: "How It Works" },
-    { path: "/detection", label: "Detection" },
-    { path: "/results", label: "Results History" },
-    { path: "/about", label: "About" }
+    { path: "/", label: t("navbar.home") },
+    { path: "/how-it-works", label: t("navbar.howItWorks") },
+    { path: "/detection", label: t("navbar.detection") },
+    { path: "/results", label: t("navbar.results") },
+    { path: "/about", label: t("navbar.about") }
   ];
 
   return (
@@ -24,7 +26,7 @@ export const Navbar = () => {
           <Link to="/" className="flex items-center gap-2 group">
             <Beaker className="h-8 w-8 text-[#2563EB] group-hover:rotate-12 transition-transform" />
             <span className="text-xl font-bold text-[#1E3A8A] hidden sm:block">
-            Ai Hydrosense
+            {t("app.name")}
             </span>
           </Link>
 
@@ -55,7 +57,22 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Language Switcher + Mobile Menu Button */}
+          <div className="flex items-center gap-2">
+            <select
+              aria-label="Language"
+              className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white"
+              value={i18n.language?.slice(0,2) || "en"}
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+            >
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+              <option value="hi">HI</option>
+              <option value="ta">TA</option>
+              <option value="ml">ML</option>
+              <option value="mr">MR</option>
+              <option value="gu">GU</option>
+            </select>
           <button
             data-testid="mobile-menu-btn"
             onClick={() => setIsOpen(!isOpen)}
@@ -67,6 +84,7 @@ export const Navbar = () => {
               <Menu className="h-6 w-6 text-[#1E3A8A]" />
             )}
           </button>
+          </div>
         </div>
       </div>
 
