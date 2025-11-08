@@ -4,7 +4,8 @@ import { History, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 
-const BACKEND_URL = 'https://pharmacy-project-lh5x.onrender.com';
+// const BACKEND_URL = 'https://pharmacy-project-lh5x.onrender.com';
+const BACKEND_URL = 'http://localhost:8000';
 const API = `${BACKEND_URL}/api`;
 
 export default function ResultHistory() {

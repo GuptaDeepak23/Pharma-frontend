@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Upload, Camera, Loader2, AlertCircle, CheckCircle2, Palette, Brain, Lightbulb, Shield, TrendingUp } from "lucide-react";
+import { Upload, Camera, Loader2, AlertCircle, CheckCircle2, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ColorPicker from "@/components/ColorPicker";
 import axios from "axios";
 import { toast } from "sonner";
 
-const BACKEND_URL ='https://pharmacy-project-lh5x.onrender.com';
+// const BACKEND_URL ='https://pharmacy-project-lh5x.onrender.com';
+const BACKEND_URL = 'http://localhost:8000';
 const API = `${BACKEND_URL}/api`;
 
 export default function Detection() {
@@ -261,10 +262,12 @@ export default function Detection() {
               <h2 className="text-3xl font-bold text-[#1E3A8A] mb-2">
                 Analysis Results
               </h2>
+              {/* AI-Powered Safety Recommendations badge - commented out
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 text-sm text-[#1E3A8A]">
                 <Brain className="h-4 w-4" />
                 AI-Powered Safety Recommendations
               </div>
+              */}
             </div>
 
             <div className="space-y-6">
@@ -328,7 +331,7 @@ export default function Detection() {
               </div>
 
               {/* Basic Recommendation */}
-              <div className="bg-blue-50 rounded-2xl p-6">
+              {/* <div className="bg-blue-50 rounded-2xl p-6">
                 <label className="text-sm font-medium text-[#1E3A8A] block mb-2">
                   Basic Recommendation
                 </label>
@@ -338,10 +341,10 @@ export default function Detection() {
                 >
                   {result.recommendation}
                 </p>
-              </div>
+              </div> */}
 
-              {/* AI-Powered Recommendations and Precautions */}
-              {result.ai_recommendations && Object.keys(result.ai_recommendations).length > 0 && (
+              {/* AI-Powered Recommendations and Precautions - commented out for now */}
+              {/* {result.ai_recommendations && Object.keys(result.ai_recommendations).length > 0 && (
                 <div className="space-y-6">
                   <div className="text-center">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-blue-50 text-sm text-[#1E3A8A] mb-4">
@@ -350,7 +353,6 @@ export default function Detection() {
                     </div>
                   </div>
 
-                  {/* Immediate Actions */}
                   {result.ai_recommendations.immediate_actions && (
                     <div className="bg-red-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
@@ -370,7 +372,6 @@ export default function Detection() {
                     </div>
                   )}
 
-                  {/* Treatment Options */}
                   {result.ai_recommendations.treatment_options && (
                     <div className="bg-green-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
@@ -390,7 +391,6 @@ export default function Detection() {
                     </div>
                   )}
 
-                  {/* Health Risks */}
                   {result.ai_recommendations.health_risks && (
                     <div className="bg-orange-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
@@ -405,7 +405,6 @@ export default function Detection() {
                     </div>
                   )}
 
-                  {/* Prevention Tips */}
                   {result.ai_recommendations.prevention_tips && (
                     <div className="bg-blue-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
@@ -425,7 +424,6 @@ export default function Detection() {
                     </div>
                   )}
 
-                  {/* Professional Help */}
                   {result.ai_recommendations.professional_help && (
                     <div className="bg-purple-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
@@ -440,7 +438,6 @@ export default function Detection() {
                     </div>
                   )}
 
-                  {/* Additional Precautions */}
                   {result.ai_recommendations.additional_precautions && (
                     <div className="bg-yellow-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
@@ -455,7 +452,7 @@ export default function Detection() {
                     </div>
                   )}
                 </div>
-              )}
+              )} */}
             </div>
           </motion.div>
         )}
