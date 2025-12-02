@@ -93,7 +93,7 @@ export default function About() {
           <p className="text-base text-gray-600 mb-6 max-w-2xl mx-auto">{t("about.contactBody")}</p>
           <Button
             data-testid="email-btn"
-            onClick={() => window.location.href = 'mailto:contact@watermetal-detection.com'}
+            onClick={() => window.location.href = 'mailto:snehatiwari9892@gmail.com'}
             className="bg-gradient-to-r from-[#1E3A8A] to-[#2563EB] hover:from-[#1e40af] hover:to-[#1d4ed8] text-white px-8 py-6 rounded-full text-lg"
           >
             <Mail className="mr-2 h-5 w-5" />

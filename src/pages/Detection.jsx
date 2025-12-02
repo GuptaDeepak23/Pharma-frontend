@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Upload, Camera, Loader2, AlertCircle, CheckCircle2, Palette } from "lucide-react";
+import { Upload, Camera, Loader2, AlertCircle, CheckCircle2, Palette, TrendingUp, Info, Brain, Shield, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ColorPicker from "@/components/ColorPicker";
 import axios from "axios";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 
 // const BACKEND_URL ='https://pharmacy-project-lh5x.onrender.com';
-const BACKEND_URL = 'http://localhost:8000';
+const BACKEND_URL = 'https://pharmacy-project-lzv7.onrender.com';
 const API = `${BACKEND_URL}/api`;
 
 export default function Detection() {
@@ -58,12 +58,15 @@ export default function Detection() {
         console.log("🔄 Using automatic detection");
       }
 
+      console.log(`🌐 Sending request to: ${API}/analyze`);
       const response = await axios.post(`${API}/analyze`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
-        }
+        },
+        withCredentials: false, // Don't send credentials for CORS
       });
 
+      console.log("✅ API Response:", response.data);
       setResult(response.data);
       toast.success(t("detection.analysisResults"));
     } catch (error) {
@@ -264,12 +267,10 @@ export default function Detection() {
               <h2 className="text-3xl font-bold text-[#1E3A8A] mb-2">
                 Analysis Results
               </h2>
-              {/* AI-Powered Safety Recommendations badge - commented out
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 text-sm text-[#1E3A8A]">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 text-sm text-[#1E3A8A] mb-4">
                 <Brain className="h-4 w-4" />
-                {t("detection.aiBadge")}
+                AI-Powered Analysis
               </div>
-              */}
             </div>
 
             <div className="space-y-6">
@@ -294,6 +295,34 @@ export default function Detection() {
                   {result.concentration}
                 </div>
               </div>
+
+              {/* Confidence & Match Type (if available) */}
+              {(result.confidence !== undefined || result.matchedType) && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {result.confidence !== undefined && (
+                    <div>
+                      <label className="text-sm font-medium text-gray-500 block mb-2">Confidence</label>
+                      <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${getConfidenceColor(result.confidence * 100)}`}>
+                        {getConfidenceIcon(result.confidence * 100)}
+                        {(result.confidence * 100).toFixed(0)}%
+                      </div>
+                    </div>
+                  )}
+                  {result.matchedType && (
+                    <div>
+                      <label className="text-sm font-medium text-gray-500 block mb-2">Match Type</label>
+                      <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${
+                        result.matchedType === "exact" 
+                          ? "text-green-600 bg-green-50" 
+                          : "text-yellow-600 bg-yellow-50"
+                      }`}>
+                        <Info className="h-4 w-4" />
+                        {result.matchedType === "exact" ? "Exact Match" : "Approximate Match"}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Status */}
               <div>
@@ -324,26 +353,33 @@ export default function Detection() {
                 </div>
               </div>
 
-              {/* Basic Recommendation */}
-              {/* <div className="bg-blue-50 rounded-2xl p-6">
-                <label className="text-sm font-medium text-[#1E3A8A] block mb-2">
-                  Basic Recommendation
-                </label>
-                <p
-                  data-testid="recommendation"
-                  className="text-base text-gray-700"
-                >
-                  {result.recommendation}
-                </p>
-              </div> */}
+              {/* AI-Based Result Summary */}
+              {result.ai_recommendations && Object.keys(result.ai_recommendations).length > 0 && (
+                <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border-2 border-purple-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 bg-purple-100 rounded-lg">
+                      <Brain className="h-5 w-5 text-purple-600" />
+                    </div>
+                    <label className="text-lg font-semibold text-[#1E3A8A]">
+                      AI-Based Result Summary
+                    </label>
+                  </div>
+                  <p
+                    data-testid="ai-summary"
+                    className="text-base text-gray-700 leading-relaxed"
+                  >
+                    {result.recommendation}
+                  </p>
+                </div>
+              )}
 
-              {/* AI-Powered Recommendations and Precautions - commented out for now */}
-              {/* {result.ai_recommendations && Object.keys(result.ai_recommendations).length > 0 && (
-                <div className="space-y-6">
+              {/* AI-Powered Recommendations and Suggestions */}
+              {result.ai_recommendations && Object.keys(result.ai_recommendations).length > 0 && (
+                <div className="space-y-6 mt-6">
                   <div className="text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-blue-50 text-sm text-[#1E3A8A] mb-4">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-blue-50 text-sm font-semibold text-[#1E3A8A] mb-4">
                       <Brain className="h-4 w-4" />
-                      AI-Powered Safety Recommendations
+                      AI Suggestions & Recommendations
                     </div>
                   </div>
 
@@ -351,7 +387,9 @@ export default function Detection() {
                     <div className="bg-red-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <AlertCircle className="h-5 w-5 text-red-600" />
-                        <label className="text-sm font-medium text-red-800">{t("detection.labels.immediateActions")}</label>
+                        <label className="text-sm font-medium text-red-800">
+                          {t("detection.labels.immediateActions") || "Immediate Actions"}
+                        </label>
                       </div>
                       <ul className="space-y-2">
                         {result.ai_recommendations.immediate_actions.map((action, index) => (
@@ -368,7 +406,9 @@ export default function Detection() {
                     <div className="bg-green-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <Shield className="h-5 w-5 text-green-600" />
-                        <label className="text-sm font-medium text-green-800">{t("detection.labels.treatmentOptions")}</label>
+                        <label className="text-sm font-medium text-green-800">
+                          {t("detection.labels.treatmentOptions") || "Treatment Options"}
+                        </label>
                       </div>
                       <ul className="space-y-2">
                         {result.ai_recommendations.treatment_options.map((option, index) => (
@@ -385,7 +425,9 @@ export default function Detection() {
                     <div className="bg-orange-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <AlertCircle className="h-5 w-5 text-orange-600" />
-                        <label className="text-sm font-medium text-orange-800">{t("detection.labels.healthConsiderations")}</label>
+                        <label className="text-sm font-medium text-orange-800">
+                          {t("detection.labels.healthConsiderations") || "Health Risks & Considerations"}
+                        </label>
                       </div>
                       <p className="text-sm text-gray-700">
                         {result.ai_recommendations.health_risks}
@@ -397,7 +439,9 @@ export default function Detection() {
                     <div className="bg-blue-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <Lightbulb className="h-5 w-5 text-blue-600" />
-                        <label className="text-sm font-medium text-blue-800">{t("detection.labels.preventionTips")}</label>
+                        <label className="text-sm font-medium text-blue-800">
+                          {t("detection.labels.preventionTips") || "Prevention Tips"}
+                        </label>
                       </div>
                       <ul className="space-y-2">
                         {result.ai_recommendations.prevention_tips.map((tip, index) => (
@@ -414,7 +458,9 @@ export default function Detection() {
                     <div className="bg-purple-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <TrendingUp className="h-5 w-5 text-purple-600" />
-                        <label className="text-sm font-medium text-purple-800">{t("detection.labels.professionalHelp")}</label>
+                        <label className="text-sm font-medium text-purple-800">
+                          {t("detection.labels.professionalHelp") || "Professional Help"}
+                        </label>
                       </div>
                       <p className="text-sm text-gray-700">
                         {result.ai_recommendations.professional_help}
@@ -426,7 +472,9 @@ export default function Detection() {
                     <div className="bg-yellow-50 rounded-2xl p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <Shield className="h-5 w-5 text-yellow-600" />
-                        <label className="text-sm font-medium text-yellow-800">{t("detection.labels.additionalPrecautions")}</label>
+                        <label className="text-sm font-medium text-yellow-800">
+                          {t("detection.labels.additionalPrecautions") || "Additional Precautions"}
+                        </label>
                       </div>
                       <p className="text-sm text-gray-700">
                         {result.ai_recommendations.additional_precautions}
@@ -434,7 +482,7 @@ export default function Detection() {
                     </div>
                   )}
                 </div>
-              )} */}
+              )}
             </div>
           </motion.div>
         )}

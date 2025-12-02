@@ -6,6 +6,7 @@ import ResultHistory from "@/pages/ResultHistory";
 import About from "@/pages/About";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ReadAloud from "@/components/ReadAloud";
 import { Toaster } from "@/components/ui/sonner";
 import "@/App.css";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
         <Footer />
+        <ReadAloud />
         <Toaster position="top-right" richColors />
       </BrowserRouter>
     </div>

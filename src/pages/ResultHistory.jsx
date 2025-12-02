@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 
 // const BACKEND_URL = 'https://pharmacy-project-lh5x.onrender.com';
-const BACKEND_URL = 'http://localhost:8000';
+const BACKEND_URL = 'https://pharmacy-project-lzv7.onrender.com';
 const API = `${BACKEND_URL}/api`;
 
 export default function ResultHistory() {
@@ -20,11 +20,38 @@ export default function ResultHistory() {
 
   const fetchResults = async () => {
     try {
-      const response = await axios.get(`${API}/results`);
-      setResults(response.data);
+      console.log(`🌐 Fetching from: ${API}/results`);
+      const response = await axios.get(`${API}/results`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: false, // Don't send credentials for CORS
+      });
+      console.log("✅ API Response:", response);
+      console.log("✅ Response Data:", response.data);
+      setResults(response.data || []);
     } catch (error) {
-      console.error("Error fetching results:", error);
-      toast.error(t("results.emptyTitle"));
+      console.error("❌ Error fetching results:", error);
+      console.error("❌ Error details:", {
+        message: error.message,
+        response: error.response,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        headers: error.response?.headers,
+      });
+      
+      // Show more detailed error message
+      if (error.response) {
+        // Server responded with error
+        toast.error(`API Error: ${error.response.status} - ${error.response.statusText || error.message}`);
+      } else if (error.request) {
+        // Request made but no response
+        toast.error("No response from server. Check CORS configuration.");
+      } else {
+        // Something else happened
+        toast.error(error.message || t("results.emptyTitle"));
+      }
     } finally {
       setLoading(false);
     }
